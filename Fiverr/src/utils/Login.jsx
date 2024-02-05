@@ -14,20 +14,49 @@ import {
   ModalCloseButton,
   useDisclosure,
 } from "@chakra-ui/react";
+import axios from 'axios'
 import { useState } from "react";
 const Login= () => {
+    const [userDetails, setUserDetails] = useState({
+        email: "",
+        password: "",
+      });
+      const handleChange = (e) => {
+        const { name, value } = e.target;
+        setUserDetails({
+          ...userDetails,
+          [name]: value,
+        });
+      };
+      const handleSubmit = async () => {
+        try {
+          const userData = await axios.post(
+            "https://fiverrbackend-production.up.railway.app/user/login", userDetails, {withCredentials:true}
+          );
+          console.log(userData);
+          setUserDetails({
+            email:"",
+            password:""
+          })
+          if(userData.data.msg=="user login successfully."){
+            alert(`user login successfully.`)
+            setIsAuth(!isAuth)
+            navigate('/admin');
+          }
+        } catch (error) {
+          console.log(error);
+          if(error.response.data.msg=="user not found please signup first"){
+            alert(`User not found please recheck you email.`)
+          }
+          if(error.response.data.msg=="Invalid password"){
+            alert(`Invalid password`)
+          }
+        }
+      };
   const OverlayOne = () => (
     <ModalOverlay
       bg="blackAlpha.300"
       backdropFilter="blur(10px) hue-rotate(90deg)"
-    />
-  );
-  const OverlayTwo = () => (
-    <ModalOverlay
-      bg="none"
-      backdropFilter="auto"
-      backdropInvert="80%"
-      backdropBlur="2px"
     />
   );
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -63,11 +92,25 @@ const Login= () => {
           <ModalBody>
             <FormControl>
               <FormLabel>E-mail</FormLabel>
-              <Input type="email" placeholder="Type Here" />
+              <Input 
+              onChange={handleChange}
+              type="email"
+              name="email"
+              id="email"
+              value={userDetails.email}
+              placeholder="Type Here" 
+              />
             </FormControl>
             <FormControl>
               <FormLabel>Password</FormLabel>
-              <Input type="password" placeholder="Type Here" />
+              <Input 
+              onChange={handleChange}
+              type="password"
+              name="password"
+              id="password"
+              value={userDetails.password}
+              placeholder="Type Here"
+              />
             </FormControl>
           </ModalBody>
           <ModalFooter>
@@ -77,6 +120,7 @@ const Login= () => {
               width={"100%"}
               fontWeight={"bold"}
               fontSize={"22px"}
+              onClick={handleSubmit}
             >
               Log in
             </Button>
