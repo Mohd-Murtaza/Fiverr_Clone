@@ -84,7 +84,7 @@
     }
     .navbarLi:hover{
         cursor: pointer;
-        color: #1dbf73;
+        color: rgb(29, 191, 115);
     }
     .navbarLiIcon{
         color: #62646a;

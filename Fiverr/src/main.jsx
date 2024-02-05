@@ -4,6 +4,7 @@ import App from './App.jsx'
 import './index.css'
 import { ChakraProvider } from '@chakra-ui/react'
 import { extendTheme } from '@chakra-ui/react'
+import AuthContextProvider from './contexts/AuthContextProvider.jsx'
 const theme = extendTheme({
     breakpoints: {
       base: "0em", //0px
@@ -17,7 +18,9 @@ const theme = extendTheme({
 ReactDOM.createRoot(document.getElementById('root')).render(
     <React.StrictMode>
         <ChakraProvider theme={theme}>
-            <App />
+            <AuthContextProvider>
+                <App />
+            </AuthContextProvider>
         </ChakraProvider>
     </React.StrictMode>  
 )

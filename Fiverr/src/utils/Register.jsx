@@ -16,7 +16,9 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 const Register= () => {
+  const navigate=useNavigate()
   const [userDetails, setUserDetails] = useState({
     userName: "",
     email: "",
@@ -40,6 +42,7 @@ const Register= () => {
       console.log(userData);
       if(userData.data.msg=="user register successfully"){
         alert(`user register successfully`)
+        navigate("/login")
       }
       setUserDetails({
         userName: "",

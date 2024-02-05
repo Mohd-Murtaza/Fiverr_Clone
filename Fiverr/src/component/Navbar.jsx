@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import "../styles/Navbar.css"
 import fiverLogo from '../assets/fiverrLogo.webp'
 import { HiMiniMagnifyingGlass } from "react-icons/hi2";
@@ -8,7 +8,11 @@ import { useMediaQuery } from "react-responsive";
 import NavMenu from '../utils/NavMenu.jsx'
 import Join from '../utils/Join.jsx';
 import Sigin from '../utils/Signin.jsx';
+import { Link } from 'react-router-dom';
+import { AuthContext } from '../contexts/AuthContextProvider.jsx';
+import ProfileMenu from '../utils/ProfileMenu.jsx';
 const Navbar = () => {
+  const {isAuth}=useContext(AuthContext)
   const isFullWidth=useMediaQuery({minWidth:1050})
   return (
    <div id='NavbarMainDiv'>
@@ -26,8 +30,12 @@ const Navbar = () => {
             <li className='navbarLi' type="none">Explore <MdKeyboardArrowDown className='navbarLiIcon' /></li>
             {isFullWidth?<li className='navbarLi' type="none"><IoIosGlobe className='navbarLiIcon'/> English</li>:<li type="none"></li>}
             <li className='navbarLi' type="none">Become a Seller</li>
-            <li className='navbarLi' type="none" ><Sigin/></li>
-            <li className='navbarLi' type="none" ><Join/></li>
+            {!isAuth?(
+              <>
+              <li className='navbarLi' type="none" ><Sigin/></li>
+              <li className='navbarLi' type="none" ><Join/></li>
+              </>
+            ):<ProfileMenu/>}
       </div>
     </div>
    </div>

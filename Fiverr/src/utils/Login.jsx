@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   Button,
   Modal,
@@ -16,7 +16,11 @@ import {
 } from "@chakra-ui/react";
 import axios from 'axios'
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../contexts/AuthContextProvider";
 const Login= () => {
+    const {isAuth,setIsAuth,loginPersonName,setLoginPersonName}=useContext(AuthContext)
+    const navigate=useNavigate()
     const [userDetails, setUserDetails] = useState({
         email: "",
         password: "",
@@ -41,7 +45,8 @@ const Login= () => {
           if(userData.data.msg=="user login successfully."){
             alert(`user login successfully.`)
             setIsAuth(!isAuth)
-            navigate('/admin');
+            setLoginPersonName(userData.data.userName)
+            navigate('/');
           }
         } catch (error) {
           console.log(error);

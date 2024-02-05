@@ -60,6 +60,8 @@ const HomePageFeaturesCards = () => {
   return (
     <Box
     padding={"20px"}
+    width={"95%"}
+    margin={"auto"}
     >
         <Swiper
         modules={[Navigation]}
@@ -71,6 +73,7 @@ const HomePageFeaturesCards = () => {
           },
           350: {
             slidesPerView: 2.1,
+            spaceBetween:25
           },
           400: {
             slidesPerView: 2.3,
@@ -122,8 +125,7 @@ const HomePageFeaturesCards = () => {
           </SwiperSlide>
         )} 
       </Swiper>
-    </Box>
-      
+    </Box> 
   );
 };
 
