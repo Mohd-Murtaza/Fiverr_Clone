@@ -33,6 +33,7 @@ import { FcGoogle } from "react-icons/fc";
 import { MdOutlineEmail } from "react-icons/md";
 import { FaApple } from "react-icons/fa";
 import { TfiFacebook } from "react-icons/tfi";
+// import { Link } from "react-router-dom";
 import Register from "./Register";
 import Login from "./Login";
 export default function Join() {
