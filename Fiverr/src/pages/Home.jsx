@@ -15,8 +15,8 @@ const Home = () => {
       <Navbar/>
       <HomePageBanner/>
       <HomePageFeaturesCards/>
-      <PopularServices/>
       <WaysToGet/>
+      <PopularServices/>
       <HomePageVideo/>
       <HomePageBusinessSolution/>
       <HomePageMadeFiverr/>
