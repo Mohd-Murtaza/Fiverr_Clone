@@ -15,10 +15,13 @@ import {
   ModalCloseButton,
   useDisclosure,
 } from "@chakra-ui/react";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../contexts/AuthContextProvider";
 const Register= () => {
-  const navigate=useNavigate()
+  const { isAuth, setIsAuth, loginPersonName, setLoginPersonName } =
+    useContext(AuthContext);
+  const navigate = useNavigate()
   const [userDetails, setUserDetails] = useState({
     userName: "",
     email: "",
@@ -41,8 +44,10 @@ const Register= () => {
       );
       console.log(userData);
       if(userData.data.msg=="user register successfully"){
-        alert(`user register successfully`)
-        navigate("/login")
+        alert(`user register successfully`);
+        setIsAuth(!isAuth);
+        setLoginPersonName(userData.data.newUser.userName);
+        navigate("/");
       }
       setUserDetails({
         userName: "",
@@ -52,7 +57,7 @@ const Register= () => {
     } catch (error) {
       console.log(error);
       if(error.response.data=='user is exist already'){
-        alert(`user is exist already`)
+        alert(`user is already exist`)
       }else if(error.response.data.error=="Password does not meet the criteria."){
         alert(`Your password should have a Uppercase letter, a Special Character, a Number and length should have atleast 8 Character`)
       }
@@ -73,6 +78,7 @@ const Register= () => {
         onClick={() => {
           setOverlay(<OverlayOne />);
           onOpen();
+          window.history.pushState(null, "", "/register");
         }}
       >
         Continue with email

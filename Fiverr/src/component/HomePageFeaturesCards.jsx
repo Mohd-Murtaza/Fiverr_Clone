@@ -13,7 +13,6 @@ import writingTranslation from '../assets/writing-translation.svg';
 
 // Import Swiper styles
 import 'swiper/css/bundle';
-import '../styles/HomePageFeaturesCards.css';
 
 // import required modules
 import { Pagination,Navigation } from 'swiper/modules';
@@ -59,14 +58,15 @@ const HomePageFeaturesCards = () => {
   ];
   return (
     <Box
-    padding={"20px"}
-    width={"95%"}
+    padding={"20px 0px"}
+    width={"90%"}
     margin={"auto"}
+    position={"relative"}
     >
         <Swiper
         modules={[Navigation]}
         spaceBetween={8}
-        navigation
+        navigation={{ nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' }}
         breakpoints={{
           250: {
             slidesPerView:1.6
@@ -125,6 +125,48 @@ const HomePageFeaturesCards = () => {
           </SwiperSlide>
         )} 
       </Swiper>
+      <Box 
+        position="absolute" 
+        top="60%" 
+        transform="translateY(-50%)" 
+        left={{base:"-10px",sm:"-20px"}} 
+        width={{base:"30px", sm:"40px"}}
+        height={{base:"30px", sm:"40px"}}
+        color="green"
+        fontSize="10px"
+        marginRight="0px"
+        backgroundColor= "rgb(227, 227, 227)"
+        borderRadius="50%"
+        transition=".5s"
+        className="swiper-button-prev"
+        _after={{
+            fontSize:"1.3rem",
+            marginLeft:"-5px",
+            color:"#1dbf73"
+        }}
+        >
+        </Box>
+        <Box 
+        position="absolute" 
+        top="60%" 
+        transform="translateY(-50%)" 
+        right={{base:"-10px",sm:"-20px"}} 
+        width={{base:"30px", sm:"40px"}}
+        height={{base:"30px", sm:"40px"}}
+        color="green"
+        fontSize="10px"
+        marginRight="0px"
+        backgroundColor= "rgb(227, 227, 227)"
+        borderRadius="50%"
+        transition=".5s"
+        className="swiper-button-next"
+        _after={{
+            fontSize:"1.3rem",
+            marginRight:"-5px",
+            color:"#1dbf73"
+        }}
+        >
+        </Box>
     </Box> 
   );
 };
