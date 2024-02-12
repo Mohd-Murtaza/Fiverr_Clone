@@ -8,12 +8,14 @@ import {
   MenuItem,
   MenuDivider,
   Flex,
+  useToast,
 } from "@chakra-ui/react";
 import axios from "axios";
 import { AuthContext } from "../contexts/AuthContextProvider";
 import { useNavigate } from "react-router-dom";
 
 const ProfileMenu = () => {
+  const toast=useToast()
   const navigate = useNavigate();
   const { loginPersonName, setLoginPersonName } = useContext(AuthContext);
   const {isAuth, setIsAuth}=useContext(AuthContext)
@@ -26,17 +28,21 @@ const ProfileMenu = () => {
       );
       console.log(logout);
       if (logout.data.msg == "logout successfull") {
-        alert(`${loginPersonName} you are logout successfully`);
-        setIsAuth(!isAuth);
+        toast({
+          position: 'top',
+          title: `${loginPersonName} you are logout successfully`,
+          status: "success",
+          isClosable: true,
+          duration: 3000,
+        })
+        setIsAuth(false);
+        localStorage.removeItem("loginPersonName")
+        localStorage.setItem("isAuth",false)
         setLoginPersonName("")
         navigate("/");
       }
     } catch (error) {
-      console.log("error");
       console.log(error);
-      if (error.response.data.msg == "you already logout!") {
-        alert(`you are logedout person!`);
-      }
     }
   };
   return (

@@ -14,11 +14,13 @@ import {
   FormLabel,
   ModalCloseButton,
   useDisclosure,
+  useToast,
 } from "@chakra-ui/react";
 import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContextProvider";
 const Register= () => {
+  const toast=useToast()
   const { isAuth, setIsAuth, loginPersonName, setLoginPersonName } =
     useContext(AuthContext);
   const navigate = useNavigate()
@@ -44,7 +46,14 @@ const Register= () => {
       );
       console.log(userData);
       if(userData.data.msg=="user register successfully"){
-        alert(`user register successfully`);
+        // alert(`user register successfully`);
+        toast({
+          position: 'top',
+          title: `Welcome to the Fiverr you're register successfully`,
+          status: "success",
+          isClosable: true,
+          duration: 3000,
+        })
         setIsAuth(!isAuth);
         setLoginPersonName(userData.data.newUser.userName);
         navigate("/");
@@ -57,9 +66,23 @@ const Register= () => {
     } catch (error) {
       console.log(error);
       if(error.response.data=='user is exist already'){
-        alert(`user is already exist`)
+        // alert(`user is already exist`)
+        toast({
+          position: 'top',
+          title: `Oops! user is already exist!`,
+          status: "warning",
+          isClosable: true,
+          duration: 3000,
+        })
       }else if(error.response.data.error=="Password does not meet the criteria."){
-        alert(`Your password should have a Uppercase letter, a Special Character, a Number and length should have atleast 8 Character`)
+        // alert(`Your password should have a Uppercase letter, a Special Character, a Number and length should have atleast 8 Character`)
+        toast({
+          position: 'top',
+          title: `Your password should have 1 Uppercase Letter, 1 Special Character, 1 Number, and at least 8 Characters`,
+          status: "warning",
+          isClosable: true,
+          duration: 3000,
+        })
       }
     }
   };
@@ -101,7 +124,7 @@ const Register= () => {
           </ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <FormControl>
+            <FormControl isRequired>
               <FormLabel>User Name</FormLabel>
               <Input 
               type="text" 
@@ -110,7 +133,7 @@ const Register= () => {
               onChange={handleChange}
               placeholder="Type Here" />
             </FormControl>
-            <FormControl>
+            <FormControl isRequired>
               <FormLabel>E-mail</FormLabel>
               <Input 
               type="email" 
@@ -119,7 +142,7 @@ const Register= () => {
               onChange={handleChange}
               placeholder="Type Here" />
             </FormControl>
-            <FormControl>
+            <FormControl isRequired>
               <FormLabel>Password</FormLabel>
               <Input 
               type="password"

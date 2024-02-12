@@ -7,6 +7,7 @@ import {Link} from 'react-router-dom'
 import Home from './pages/Home'
 import Demo from './utils/Join';
 import AllRoutes from './allRoutes/AllRoutes';
+import Products from './pages/Products';
 
 
 
@@ -16,6 +17,7 @@ function App() {
   return (
     <>
     <AllRoutes/>
+    {/* <Products/> */}
     </>
   )
 }

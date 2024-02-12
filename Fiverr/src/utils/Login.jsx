@@ -12,12 +12,14 @@ import {
   FormLabel,
   ModalCloseButton,
   useDisclosure,
+  useToast,
 } from "@chakra-ui/react";
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContextProvider";
 const Login = () => {
+  const toast=useToast()
   const { isAuth, setIsAuth, loginPersonName, setLoginPersonName } = useContext(AuthContext);
   const navigate = useNavigate();
   const [userDetails, setUserDetails] = useState({
@@ -44,18 +46,38 @@ const Login = () => {
         password: "",
       });
       if (userData.data.msg == "user login successfully.") {
-        alert(`user login successfully.`);
-        setIsAuth(!isAuth);
+        toast({
+          position: 'top',
+          title: `${userData.data.userName} your're login successfully`,
+          status: "success",
+          isClosable: true,
+          duration: 3000,
+        })
+        setIsAuth(true);
         setLoginPersonName(userData.data.userName);
+        localStorage.setItem("isAuth",true)
+        localStorage.setItem("loginPersonName",userData.data.userName)
         navigate("/");
       }
     } catch (error) {
       console.log(error);
       if (error.response.data.msg == "user not found please signup first") {
-        alert(`User not found please recheck you email.`);
+        toast({
+          position: 'top',
+          title: `User not found please recheck you email.`,
+          status: "warning",
+          isClosable: true,
+          duration: 3000,
+        })
       }
       if (error.response.data.msg == "Invalid password") {
-        alert(`Invalid password`);
+        toast({
+          position: 'top',
+          title: `Invalid password`,
+          status: "error",
+          isClosable: true,
+          duration: 3000,
+        })
       }
     }
   };
@@ -97,7 +119,7 @@ const Login = () => {
             </ModalHeader>
             <ModalCloseButton />
             <ModalBody>
-              <FormControl>
+              <FormControl isRequired>
                 <FormLabel>E-mail</FormLabel>
                 <Input
                   onChange={handleChange}
@@ -108,7 +130,7 @@ const Login = () => {
                   placeholder="Type Here"
                 />
               </FormControl>
-              <FormControl>
+              <FormControl isRequired>
                 <FormLabel>Password</FormLabel>
                 <Input
                   onChange={handleChange}
