@@ -31,7 +31,7 @@ const SingleProduct = () => {
   const fetchProduct = async () => {
     try {
       let product = await axios.get(
-        `http://localhost:8080/product/allProducts?_id=${query}`,
+        `https://fiverrbackend-production.up.railway.app/product/allProducts?_id=${query}`,
         { withCredentials: true }
       );
       product = product.data.data;
