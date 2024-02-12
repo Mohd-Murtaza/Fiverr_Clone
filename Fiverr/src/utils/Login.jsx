@@ -13,10 +13,12 @@ import {
   ModalCloseButton,
   useDisclosure,
   useToast,
+  Flex,
+  Text,
 } from "@chakra-ui/react";
 import axios from "axios";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContextProvider";
 const Login = () => {
   const toast=useToast()
@@ -142,6 +144,14 @@ const Login = () => {
                 />
               </FormControl>
             </ModalBody>
+            <Flex justifyContent={"space-around"}>
+              <Link to="/reset">
+                 <Text cursor={"pointer"} textDecoration={"underline"} color={"black"} fontWeight={"bold"}>Reset Password</Text>
+              </Link>
+              <Link to="/forget-password">
+                  <Text cursor={"pointer"} textDecoration={"underline"} color={"black"} fontWeight={"bold"}>Forget Password</Text>
+              </Link>
+            </Flex>
             <ModalFooter>
               <Button
                 colorScheme="blue"
