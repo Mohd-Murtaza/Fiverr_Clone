@@ -43,7 +43,7 @@ const Products = () => {
   const fetchProducts = async () => {
     try {
       const products = await axios.get(
-        `http://localhost:8080/product/allProducts?category=${query}`,
+        `https://fiverrbackend-production.up.railway.app/product/allProducts?category=${query}`,
         { withCredentials: true }
       );
       console.log("line no. 43", products);
