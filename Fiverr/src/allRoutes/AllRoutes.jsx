@@ -5,8 +5,6 @@ import Register from '../utils/Register';
 import Login from '../utils/Login';
 import Products from '../pages/Products';
 import SingleProduct from '../pages/SingleProduct';
-import PaymentSuccess from '../pages/PaymentSuccess';
-import PaymentFaild from '../pages/PaymentFaild';
 const AllRoutes = () => {
   return (
     <div>
