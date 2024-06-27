@@ -28,7 +28,7 @@ const OTPverification = () => {
   };
   const handleSubmit=async()=>{
     try {
-        const response=await axios.post('https://fiverrbackend-production.up.railway.app/user/otpVerify',userDetails,{withCredentials:true});
+        const response=await axios.post('https://fiverr-backend-pied.vercel.app/user/otpVerify',userDetails,{withCredentials:true});
         console.log(response)
         if(response.data.status=="success"){
             toast({

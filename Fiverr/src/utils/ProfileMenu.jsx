@@ -22,7 +22,7 @@ const ProfileMenu = () => {
   const handleLogout = async () => {
     try {
       const logout = await axios.post(
-        `https://fiverrbackend-production.up.railway.app/user/logout`,
+        `https://fiverr-backend-pied.vercel.app/user/logout`,
         {},
         { withCredentials: true }
       );

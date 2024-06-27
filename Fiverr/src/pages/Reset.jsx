@@ -32,7 +32,7 @@ const Reset = () => {
     try {
       const {
         data: { msg },
-      } = await axios.post(`https://fiverrbackend-production.up.railway.app/user/reset`, userDetails, {
+      } = await axios.post(`https://fiverr-backend-pied.vercel.app/user/reset`, userDetails, {
         withCredentials: true,
       });
       console.log(msg);

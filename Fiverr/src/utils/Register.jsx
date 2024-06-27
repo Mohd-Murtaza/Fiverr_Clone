@@ -39,7 +39,7 @@ const Register= () => {
   const handleSubmit = async () => {
     try {
       const userData = await axios.post(
-        "https://fiverrbackend-production.up.railway.app/user/signup",
+        "https://fiverr-backend-pied.vercel.app/user/signup",
         userDetails,
         { withCredentials: true },
      
