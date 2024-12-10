@@ -21,30 +21,53 @@ const ProfileMenu = () => {
   const {isAuth, setIsAuth}=useContext(AuthContext)
   const handleLogout = async () => {
     try {
-      const logout = await axios.post(
-        `https://fiverr-backend-pied.vercel.app/user/logout`,
-        {},
-        { withCredentials: true }
-      );
-      console.log(logout);
-      if (logout.data.msg == "logout successfull") {
+      let logout;
+  
+      if (localStorage.getItem("accessToken")) {
+        // User logged in via Google
+        logout = await axios.post(
+          `https://fiverr-backend-pied.vercel.app/logout`,
+          {},
+          { withCredentials: true }
+        );
+        console.log("Google logout successful:", logout);
+      } else {
+        // User logged in via traditional login
+        logout = await axios.post(
+          `https://fiverr-backend-pied.vercel.app/user/logout`,
+          {},
+          { withCredentials: true }
+        );
+        console.log("Traditional logout successful:", logout);
+      }
+  
+      // Handle logout success
+      if (logout.data.msg === "logout successfull" || logout.data.message==="Logged out successfully") {
         toast({
           position: 'top',
-          title: `${loginPersonName} you are logout successfully`,
+          title: `${loginPersonName}, you are logged out successfully.`,
           status: "success",
           isClosable: true,
           duration: 3000,
-        })
+        });
+  
+        // Clear session data
         setIsAuth(false);
-        localStorage.removeItem("loginPersonName")
-        localStorage.setItem("isAuth",false)
-        setLoginPersonName("")
+        setLoginPersonName("");
+        localStorage.removeItem("loginPersonName");
+        localStorage.removeItem("isAuth");
+        localStorage.removeItem("accessToken"); // Token from Google login
+        localStorage.removeItem("userName"); // Name from Google login
+        localStorage.removeItem("userEmail"); // Email from Google login
+  
+        // Navigate to the homepage
         navigate("/");
       }
     } catch (error) {
-      console.log(error);
+      console.log("Logout error:", error);
     }
   };
+  
   return (
     <Menu>
       <MenuButton

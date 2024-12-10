@@ -15,6 +15,9 @@ import {
   useToast,
   Flex,
   Text,
+  ListItem,
+  List,
+  Box,
 } from "@chakra-ui/react";
 import axios from "axios";
 import { useState } from "react";
@@ -93,16 +96,23 @@ const Login = () => {
   const [overlay, setOverlay] = React.useState(<OverlayOne />);
   return (
     <>
-     <li
-        type={"none"}
+     <Box 
+        as="span"
+        fontSize={"md"}
+        fontWeight="500"
+        textUnderlineOffset={2}
+        textDecoration="underline"
+        _hover={{
+          textDecoration: "none",
+          cursor: "pointer",
+        }}
         onClick={() => {
           setOverlay(<OverlayOne />);
           onOpen();
-          window.history.pushState(null, "", "/login");
         }}
       >
         Log in
-      </li>
+      </Box>
         <Modal
           size={{ base: "xs", ms: "sm", md: "sm", lg: "sm", xl: "xl" }}
           isCentered

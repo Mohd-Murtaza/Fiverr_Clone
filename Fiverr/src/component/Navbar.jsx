@@ -7,7 +7,7 @@ import { IoIosGlobe } from "react-icons/io";
 import { useMediaQuery } from "react-responsive";
 import NavMenu from "../utils/NavMenu.jsx";
 import Join from "../utils/Join.jsx";
-import Sigin from "../utils/Signin.jsx";
+import Signin from "../utils/Signin.jsx";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContextProvider.jsx";
 import ProfileMenu from "../utils/ProfileMenu.jsx";
@@ -55,7 +55,7 @@ const Navbar = () => {
           {!isAuth ? (
             <>
               <li className="navbarLi" type="none">
-                <Sigin />
+                <Signin />
               </li>
               <li className="navbarLi" type="none">
                 <Join />

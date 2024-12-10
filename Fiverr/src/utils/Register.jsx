@@ -16,6 +16,7 @@ import {
   useDisclosure,
   useToast,
 } from "@chakra-ui/react";
+import { MdOutlineEmail } from "react-icons/md";
 import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContextProvider";
@@ -96,16 +97,23 @@ const Register= () => {
   const [overlay, setOverlay] = React.useState(<OverlayOne />);
   return (
     <>
-      <li
-        type={"none"}
+      <Button
+        leftIcon={<MdOutlineEmail />}
+        colorScheme="white"
+        color={"black"}
+        marginTop={"20px"}
+        variant={"outline"}
+        _hover={{ background: "#f5f5f5" }}
+        borderColor="#e4e5e7"
+        borderWidth="1px" 
         onClick={() => {
           setOverlay(<OverlayOne />);
           onOpen();
-          window.history.pushState(null, "", "/register");
+          // window.history.pushState(null, "", "/register");
         }}
       >
-        Continue with email
-      </li>
+        Continue with Email
+      </Button>
       <Modal 
       size={{base:"xs",ms:"sm",md:"sm", lg:"sm", xl:"xl"}}
       isCentered 
@@ -120,7 +128,7 @@ const Register= () => {
             fontWeight={"bold"}
             marginTop={{base:"10px"}}
           >
-            Continue with Email ID
+            Signup with Email ID
           </ModalHeader>
           <ModalCloseButton />
           <ModalBody>
